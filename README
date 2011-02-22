@@ -1,0 +1,12 @@
+LICENSING warning:
+by using the Weka wrapper, you agree to use Weka and HexWrench in a GNU GPL compatible way
+
+= HexWrench
+
+== Weka
+HexWrench comes with a Weka layer, which goal is to turn Welo::Resources in
+weka.core.Instances.
+
+To use it, you need:
+- JRuby
+- A recent Weka JAR on your $LOAD_PATH
