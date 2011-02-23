@@ -56,14 +56,14 @@ end
 if RUBY_PLATFORM =~ /java/
   require 'hexwrench/weka'
   include_class 'weka.clusterers.SimpleKMeans'
-  xp = HexWrench::Explorer.new(Foo, foos)
+  xp = HexWrench::Weka::Explorer.new(Foo)
+  head = xp.header(:default)
+  foos.each do |foo|
+    head.add_resource(foo)
+  end
+  data = head.instances
+
   kmeans = SimpleKMeans.new
-#  data = xp.data_instances(:with_nominal)
-  p "#{xp}"
-  data = xp.data_instances(:with_relation)
-  exit
-#  data = xp.data_instances(:with_string)
-#  data = xp.data_instances(:default)
   kmeans.build_clusterer data
 
   data.num_instances.times do |i|

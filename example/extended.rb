@@ -70,6 +70,11 @@ b = B.new
 b.att5_1 = Math::PI + 1
 b.att5_2 = 'val5.3'
 b.att5_3 << C.new
+b.att5_3 << C.new
+b.att5_3 << C.new
+b.att5_3 << C.new
+b.att5_3 << C.new
+b.att5_3 << C.new
 bs << b
 b = B.new
 b.att5_1 = Math::PI + 2
