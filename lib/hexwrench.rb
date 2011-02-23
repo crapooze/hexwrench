@@ -1,6 +1,6 @@
 
 module HexWrench
-  VERSION = "0.0.1"
+  VERSION = "0.0.2"
   AUTHORS = ["crapooze"]
   WEBSITE = "https://github.com/crapooze/hexwrench"
   LICENCE = "MIT | GPL"

@@ -97,11 +97,11 @@ module HexWrench
         end
 
         def create_instances
-          inst = Weka::Instances.new(relation_name, fast_vector, resources_cnt)
+          Weka::Instances.new(relation_name, fast_vector, resources_cnt)
         end
 
-        def add_resource(resource)
-          values = features.map do |feat|
+        def values_for_resources(resource)
+          features.map do |feat|
             rb_val = resource.send(feat.sym)
             attribute = attribute(feat.sym)
             val = case feat
@@ -118,22 +118,37 @@ module HexWrench
                   when StringFeature
                     attribute.addStringValue(rb_val.to_java)
                   when RelationFeature
-                    header = header(feat.sym)
+                    header = header(feat.sym) 
                     raise NotImplementedError, "no header built for #{feat} yet" unless header
+                    data_instances = Weka::Instances.new(attribute.relation, 0)
                     if feat.relationship.many?
                       rb_val.each do |rb_val_|
-                        header.add_resource(rb_val_)
+                        header.add_resource_to_instances(rb_val_, data_instances)
                       end
                     else
-                      header.add_resource(rb_val)
+                      header.add_resource_to_instances(rb_val, data_instances)
                     end
-                    attribute.addRelation(header.instances)
+                    attribute.addRelation(data_instances) 
                   else
                     rb_val
                   end
             val
           end
+        end
+
+        def new_data_instances
+        end
+
+        def add_values_to_instances(values, instances)
           instances.add(Weka::Instance.new(1.0, values.to_java(Java::double)))
+        end
+
+        def add_resource_to_instances(resource, instances)
+          add_values_to_instances(values_for_resources(resource), instances)
+        end
+
+        def add_resource(resource)
+          add_resource_to_instances(resource, instances)
         end
       end
 
