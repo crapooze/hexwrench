@@ -1,6 +1,5 @@
-* related feature: 
 * explorer:
-- rename
+- rename to something more correct
 * weka-explorer:
-- populate attributes name on the fly
-- prepare sizes of relationships?
+- get sizes of relationships
+- check correctness of attributes uniqueness in multiple layers of relationships
