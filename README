@@ -7,6 +7,28 @@ by using the Weka wrapper, you agree to use Weka and HexWrench in a GNU GPL comp
 HexWrench comes with a Weka layer, which goal is to turn Welo::Resources in
 weka.core.Instances.
 
+=== Requirements
+
 To use it, you need:
 - JRuby
 - A recent Weka JAR on your $LOAD_PATH
+
+=== Usage
+
+See example/extended.jar to have a usage sample.
+
+=== Important
+Weka supports "related" relationships.
+Current HexWrench implementation partially works:
+- it works as expected for one level of relationship
+- in the case of 2nd and more levels of relationship,
+  it will create a new header (i.e., Attribute from Instances) 
+  per related object. Although this might be the expected behaviour in some
+  cases, it is not the "least-surprise" behaviour, future versions may change 
+  this
+- it breaks when there are "loops" in the relationship graph
+As a conclusion, DO NOT use more than one level of relationships unless you know
+Weka very well and had a look at the source.
+
+== R
+Upcoming.

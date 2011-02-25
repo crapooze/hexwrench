@@ -2,4 +2,12 @@
 - rename to something more correct
 * weka-explorer:
 - get sizes of relationships
-- check correctness of attributes uniqueness in multiple layers of relationships
+- when there are more than one relationship pointing to one kind of resources,
+  an header for each of them is created, not sure it's what we want, example:
+    class Foo
+      relationship :bar_1, :Bar, ...
+      relationship :bar_2, :Bar, ...
+      relationship :foo, :Foo, ...  #similar for looping relationships
+    end
+- when following relationships recursively, there may be loops in the relationships graphs,
+  we do not check this, not sure if it feasible in an efficient, general purpose, way
